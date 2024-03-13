@@ -3,7 +3,7 @@ public class Main {
         int n = 10;
         printAdjacencyMatrix(n);
 
-        String[] cycles = findCyclesInWheelGraph1(n);
+        String[] cycles = findCyclesInWheelGraph(n);
 
         System.out.println("\nNumber of cycles in W_" + n + ": " + cycles.length);
 
@@ -45,7 +45,7 @@ public class Main {
         }
     }
 
-    public static String[] findCyclesInWheelGraph1(int n) {
+    public static String[] findCyclesInWheelGraph(int n) {
         int totalNumbers = (n - 1) * (n - 2) + 1; // n^2 - 3n + 3
         String[] result = new String[totalNumbers];
         int index = 0;
