@@ -1,6 +1,7 @@
 public class Main {
     public static void main(String[] args) {
-        int n = 10;
+        int n = 20;
+
         printAdjacencyMatrix(n);
 
         String[] cycles = findCyclesInWheelGraph(n);
@@ -49,7 +50,7 @@ public class Main {
         int totalNumbers = (n - 1) * (n - 2) + 1; // n^2 - 3n + 3
         String[] result = new String[totalNumbers];
         int index = 0;
-
+        int count = 0;
         for (int len = 4; len <= n + 1; len++) {
             for (int start = 2; start <= n; start++) {
                 StringBuilder sb = new StringBuilder();
@@ -59,6 +60,7 @@ public class Main {
                 }
                 sb.append(1);
                 result[index++] = sb.toString();
+                count++;
             }
         }
         StringBuilder sb = new StringBuilder();
@@ -67,6 +69,8 @@ public class Main {
         }
         sb.append(2);
         result[index] = sb.toString();
+        assert count == totalNumbers;
         return result;
+
     }
 }
