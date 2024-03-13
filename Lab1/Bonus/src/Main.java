@@ -1,8 +1,15 @@
 public class Main {
     public static void main(String[] args) {
-        int n = 6;
+        int n = 10;
         printAdjacencyMatrix(n);
 
+        String[] cycles = findCyclesInWheelGraph1(n);
+
+        System.out.println("\nNumber of cycles in W_" + n + ": " + cycles.length);
+
+        for (String cycle : cycles) {
+            System.out.print(cycle + " ");
+        }
     }
 
     public static int[][] adjacencyMatrix(int n) {
@@ -28,7 +35,7 @@ public class Main {
     }
 
     public static void printAdjacencyMatrix(int n) {
-        System.out.println("The adjacency Matrix of W" + n + " is:");
+        System.out.println("The adjacency Matrix of W_" + n + " is:");
         int[][] matrix = adjacencyMatrix(n);
         for (int[] ints : matrix) {
             for (int anInt : ints) {
@@ -38,4 +45,28 @@ public class Main {
         }
     }
 
+    public static String[] findCyclesInWheelGraph1(int n) {
+        int totalNumbers = (n - 1) * (n - 2) + 1; // n^2 - 3n + 3
+        String[] result = new String[totalNumbers];
+        int index = 0;
+
+        for (int len = 4; len <= n + 1; len++) {
+            for (int start = 2; start <= n; start++) {
+                StringBuilder sb = new StringBuilder();
+                sb.append(1);
+                for (int i = 0; i < len - 2; i++) {
+                    sb.append((start + i - 1) % (n - 1) + 2);
+                }
+                sb.append(1);
+                result[index++] = sb.toString();
+            }
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i = 2; i <= n; i++) {
+            sb.append(i);
+        }
+        sb.append(2);
+        result[index] = sb.toString();
+        return result;
+    }
 }
